@@ -1,0 +1,9 @@
+#
+# RedHat VLAN configuration file
+#
+
+- name: Create the VLAN configuration file
+  template: src=vlan.j2 dest="{{ rh_network_sysconfig }}/ifcfg-{{ item.0 }}.{{ item.1 }}"
+  with_nested:
+  - "{{ parent }}"
+  - "{{ vlans }}"

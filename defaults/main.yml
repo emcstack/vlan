@@ -1,0 +1,15 @@
+---
+# defaults file for .
+
+rh_network_sysconfig: /tmp/
+
+# Normal values
+mtu: 1500
+
+# Bonding IP settings
+enable_ipv4: false
+
+# IPv6 options
+enable_ipv6: true
+init_ipv6: yes
+ipv6_autoconf: no

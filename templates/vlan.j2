@@ -1,0 +1,16 @@
+NAME="{{ item.0 }}.{{ item.1 }}"
+DEVICE="{{ item.0 }}.{{ item.1 }}"
+
+IPADDR="{{ ip_addr }}"
+NETMASK="{{ netmask }}"
+GATEWAY="{{ gateway }}"
+DNS1="{{ dns1 }}"
+DNS2="{{ dns2 }}"
+{% endif %}
+{% if enable_ipv6 %}
+IPV6INIT="{{ init_ipv6 }}"
+IPV6_AUTOCONF="{{ ipv6_autoconf }}"
+{% endif %}
+
+VLAN=yes
+VLANID={{ item.1 }}
