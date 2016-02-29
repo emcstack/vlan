@@ -1,11 +1,17 @@
 NAME="{{ item.0 }}.{{ item.1 }}"
 DEVICE="{{ item.0 }}.{{ item.1 }}"
 
-IPADDR="{{ ip_addr }}"
+{% if enable_ipv4 %}
+{% if  hostvars[ansible_hostname]['v' + item.1|string ] %}
+IPADDR="{{ hostvars[ansible_hostname]['v' + item.1|string ] }}"
+{% endif %}
+{% if netmask %}
 NETMASK="{{ netmask }}"
-GATEWAY="{{ gateway }}"
+{% endif %}
+{% if dns1 and dns2 %}
 DNS1="{{ dns1 }}"
 DNS2="{{ dns2 }}"
+{% endif %}
 {% endif %}
 {% if enable_ipv6 %}
 IPV6INIT="{{ init_ipv6 }}"

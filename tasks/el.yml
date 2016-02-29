@@ -1,0 +1,29 @@
+#
+# RedHat VLAN configuration file
+#
+
+- name: Create the VLAN configuration file
+  template: src=vlan.j2 dest="{{ el_network_sysconfig }}/ifcfg-{{ item.0 }}.{{ item.1 }}" backup=yes
+  with_nested:
+  - "{{ parent }}"
+  - "{{ vlans }}"
+  tags:
+  - vlan
+  - el
+
+- name: Debug the hostvars
+  debug: msg="{{ hostvars[ansible_hostname]['v' + item|string ]}}"
+  with_items:
+  - "{{ vlans }}"
+  tags:
+  - el
+  - vlan
+
+- name: Create the VLAN configuration file
+  template: src=vlan.j2 dest="{{ tmp_dir }}/ifcfg-{{ item.0 }}.{{ item.1 }}"
+  with_nested:
+  - "{{ parent }}"
+  - "{{ vlans }}"
+  tags:
+  - vlan
+  - el
