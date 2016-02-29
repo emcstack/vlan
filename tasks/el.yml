@@ -2,10 +2,15 @@
 # RedHat VLAN configuration file
 #
 
+- name: Debug parent
+  debug: msg="{{ parent|length }}"
+  tags:
+  - vlan
+
 - name: Create the VLAN configuration file
   template: src=el_vlan.j2 dest="{{ el_network_sysconfig }}/ifcfg-{{ item.0 }}.{{ item.1 }}" backup=yes
   with_nested:
-  - "{{ parents }}"
+  - "{{ parent }}"
   - "{{ vlans }}"
   when:
   - apply
@@ -16,7 +21,7 @@
 - name: Create the VLAN configuration file
   template: src=el_vlan.j2 dest="{{ tmp_dir }}/ifcfg-{{ item.0 }}.{{ item.1 }}"
   with_nested:
-  - "{{ parents }}"
+  - "{{ parent }}"
   - "{{ vlans }}"
   when:
   - not apply
