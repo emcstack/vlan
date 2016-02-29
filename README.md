@@ -9,7 +9,9 @@ Requirements
 
 Role Variables
 --------------
+
 | Name | Required | Default | Description
+|--- |--- |--- |---
 | parents | yes | None | Name of the parent iface of the VLAN
 | vlans | yes | None | List of VLAN IDs to create on the parent
 | apply | no | true | Determines if configuration files will go to the sysconfig directory or temporary one
