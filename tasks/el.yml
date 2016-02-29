@@ -5,7 +5,7 @@
 - name: Create the VLAN configuration file
   template: src=el_vlan.j2 dest="{{ el_network_sysconfig }}/ifcfg-{{ item.0 }}.{{ item.1 }}" backup=yes
   with_nested:
-  - "{{ parent }}"
+  - "{{ parents }}"
   - "{{ vlans }}"
   when:
   - apply
@@ -16,7 +16,7 @@
 - name: Create the VLAN configuration file
   template: src=el_vlan.j2 dest="{{ tmp_dir }}/ifcfg-{{ item.0 }}.{{ item.1 }}"
   with_nested:
-  - "{{ parent }}"
+  - "{{ parents }}"
   - "{{ vlans }}"
   when:
   - not apply
