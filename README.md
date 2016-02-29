@@ -20,6 +20,16 @@ Dependencies
 Example Playbook
 ----------------
 
+- hosts:
+  - nc-9
+  roles:
+  - vlan
+  vars:
+  - parent: bond0
+  - vlans:
+    - 110
+    - 120
+    - 130
 
 License
 -------

@@ -1,0 +1,35 @@
+NAME="{{ item.0 }}.{{ item.1 }}"
+DEVICE="{{ item.0 }}.{{ item.1 }}"
+
+{% if enable_ipv4 %}
+{% if config_from_hostvars %}
+## CONFIGURATION BASED ON THE ANSIBLE HOSTVARS ##
+{% if 'v' + item.1|string + '_ipaddr' in hostvars[inventory_hostname] and
+   hostvars[inventory_hostname]['v' + item.1|string + '_ipaddr' ] %}
+IPADDR="{{ hostvars[inventory_hostname]['v' + item.1|string + '_ipaddr'] }}"
+{% endif %}
+{% if 'v' + item.1|string + '_netmask' in hostvars[inventory_hostname] and
+    hostvars[inventory_hostname]['v' + item.1|string + '_netmask'] %}
+NETMASK="{{ hostvars[inventory_hostname]['v' + item.1|string + '_netmask'] }}"
+{% endif %}
+{%if 'v' + item.1|string + '_gateway' in hostvars[inventory_hostname] and
+     hostvars[inventory_hostname]['v' + item.1|string + '_gateway']%}
+GATEWAY="{{ hostvars[inventory_hostname]['v' + item.1|string + '_gateway'] }}"
+{% endif %}
+{% endif %}
+## END OF CONFIGURATION BASED ON HOSTVARS
+{% if manage_dns %}
+{% set i = 1 %}
+{% for dns in dns_servers %}
+DNS{{ i }}="{{ dns }}"
+{% set i = i + 1 %}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% if enable_ipv6 %}
+IPV6INIT="{{ init_ipv6 }}"
+IPV6_AUTOCONF="{{ ipv6_autoconf }}"
+{% endif %}
+
+VLAN=yes
+VLANID={{ item.1 }}

@@ -4,6 +4,9 @@
 # Apply to write config to sysconfig directory
 apply: false
 
+# Configuration from host_vars:
+config_from_hostvars: true
+
 el_network_sysconfig: /etc/sysconfig/network-scripts
 tmp_dir: /tmp
 
@@ -13,13 +16,11 @@ mtu: 1500
 # VLAN IP settings
 enable_ipv4: false
 
-# IPv4 settings:
-ip_addr:
-netmask:
-gateway:
-dns1: 8.8.8.8
-dns2: 8.8.6.6
-
+# Manage DNS
+manage_dns: true
+dns_servers:
+- "8.8.8.8"
+- "8.8.6.6"
 
 # IPv6 options
 enable_ipv6: true
